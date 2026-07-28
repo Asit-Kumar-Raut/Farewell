@@ -12,7 +12,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying }) {
 
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AudioContext();
+      const ctx = window.unlockedAudioContext || new AudioContext();
       audioContextRef.current = ctx;
       playStateRef.current = true;
 
