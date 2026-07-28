@@ -46,7 +46,7 @@ export default function MemoryTree() {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto h-[620px] bg-black/35 rounded-3xl border border-gold-400/10 p-6 flex flex-col items-center justify-between overflow-hidden shadow-2xl backdrop-blur-md">
+    <div className="relative w-full max-w-4xl mx-auto h-[520px] md:h-[620px] bg-black/35 rounded-3xl border border-gold-400/10 p-6 flex flex-col items-center justify-between overflow-hidden shadow-2xl backdrop-blur-md">
       <div className="text-center z-10 max-w-2xl px-4">
         <h3 className="font-cinzel text-xl md:text-3xl font-bold text-gold-200 tracking-wider">
           The Tree of Memories
@@ -63,7 +63,7 @@ export default function MemoryTree() {
       </div>
 
       {/* SVG Tree Structure (Grows from ground when scrolled into view) */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none mt-12 select-none">
+      <div className="absolute inset-x-0 bottom-0 top-[140px] md:top-[100px] flex items-center justify-center pointer-events-none select-none">
         <motion.svg
           initial={{ scaleY: 0, originY: 1 }}
           whileInView={{ scaleY: 1 }}
@@ -123,7 +123,7 @@ export default function MemoryTree() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-x-0 bottom-0 top-[140px] md:top-[100px]"
       >
         {wishes.map((w, index) => (
           <motion.button
