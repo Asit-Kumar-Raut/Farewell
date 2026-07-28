@@ -10,6 +10,18 @@ export default function ThankYou() {
   const [walkthroughActive, setWalkthroughActive] = useState(true);
   const [walkthroughStep, setWalkthroughStep] = useState(0);
 
+  // Disable walkthrough on mobile devices to prevent layout truncation
+  useEffect(() => {
+    const checkMobile = () => {
+      if (window.innerWidth < 768) {
+        setWalkthroughActive(false);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Trigger continuous golden fireworks/confetti during Thank You page mount
   useEffect(() => {
     const duration = 12 * 1000;
@@ -188,8 +200,8 @@ export default function ThankYou() {
             "A great teacher never truly retires... she lives forever in the hearts of her students."
           </p>
 
-          {/* Heart-Shaped Collage of the 7 Photos */}
-          <div className="w-full max-w-3xl mx-auto px-4 scale-90 md:scale-100">
+          {/* Heart-Shaped Collage of the 7 Photos (Desktop/Tablet Layout) */}
+          <div className="hidden md:block w-full max-w-3xl mx-auto px-4 scale-90 md:scale-100">
             <div className="grid grid-cols-6 gap-3 items-center justify-center">
               {collageImages.map((img, idx) => (
                 <motion.div
@@ -208,6 +220,26 @@ export default function ThankYou() {
                 </motion.div>
               ))}
             </div>
+          </div>
+
+          {/* Large Stacking List (Mobile layout as requested - bigger photos, one under another) */}
+          <div className="grid grid-cols-1 gap-6 md:hidden items-center justify-center px-4 w-full max-w-xs mx-auto mb-8">
+            {collageImages.map((img, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.8, delay: idx * 0.05 }}
+                className="glassmorphism-card p-2 rounded-2xl overflow-hidden shadow-xl cursor-pointer w-full"
+              >
+                <div className="w-full h-44 rounded-xl overflow-hidden border border-gold-400/20 relative">
+                  <img src={img.url} alt="Memory" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-radial from-transparent via-transparent to-black/25 pointer-events-none" />
+                </div>
+              </motion.div>
+            ))}
           </div>
 
           {/* Scroll prompter visible only when scroll is unlocked */}
