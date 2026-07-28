@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Calendar, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 
 export default function Gallery({ onComplete }) {
@@ -139,20 +139,7 @@ export default function Gallery({ onComplete }) {
       {/* Dynamic Ambient Background Glow */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-radial from-gold-400/5 to-transparent blur-3xl pointer-events-none" />
 
-      {/* Elegant Top Header Navigation */}
-      <div className="w-full max-w-6xl mx-auto flex items-center justify-between z-20">
-        <div className="flex flex-col">
-          <span className="font-cinzel text-xs md:text-sm tracking-widest text-gold-300 font-bold uppercase">
-            Interactive Tribute
-          </span>
-          <span className="text-[10px] md:text-xs text-gold-400/60 uppercase tracking-widest mt-1">
-            Section II • The Gallery of Honor
-          </span>
-        </div>
-        <div className="text-xs md:text-sm text-gold-300/80 uppercase tracking-widest font-semibold bg-gold-950/40 border border-gold-400/20 px-3.5 py-1.5 rounded-full backdrop-blur-md">
-          {activeIndex + 1} / {slides.length}
-        </div>
-      </div>
+
 
       {/* Interactive Photo Canvas Frame Area */}
       <div className="w-full max-w-5xl mx-auto my-auto flex flex-col items-center justify-center min-h-[50vh] z-20">
@@ -229,28 +216,7 @@ export default function Gallery({ onComplete }) {
           </AnimatePresence>
         </div>
 
-        {/* 3D Navigation Controls */}
-        <div className="flex items-center gap-10">
-          <button
-            onClick={handlePrev}
-            disabled={activeIndex === 0}
-            className={`p-3 md:p-4 rounded-full border border-gold-400/30 text-gold-300 hover:text-gold-100 flex items-center justify-center transition-all duration-300 shadow-md ${
-              activeIndex === 0
-                ? 'opacity-30 cursor-not-allowed'
-                : 'bg-gold-950/40 hover:bg-gold-900 cursor-pointer active:scale-95 shadow-gold-500/10'
-            }`}
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
 
-          <button
-            onClick={handleNext}
-            className="px-6 md:px-8 py-3.5 bg-gradient-to-r from-gold-600 to-gold-400 hover:from-gold-500 hover:to-gold-300 text-gold-950 font-bold uppercase text-xs tracking-widest rounded-full cursor-pointer flex items-center gap-2 shadow-lg shadow-gold-500/10 hover:shadow-gold-500/20 active:scale-95 transition-all duration-300"
-          >
-            <span>{activeIndex === slides.length - 1 ? "Proceed to Wishes" : "Next Photo"}</span>
-            <ChevronRight className="w-4 h-4 text-gold-950" />
-          </button>
-        </div>
       </div>
     </div>
   );
