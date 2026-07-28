@@ -213,8 +213,8 @@ export default function ThankYou() {
                   transition={{ duration: 1.0, delay: idx * 0.1 }}
                   className={`glassmorphism-card p-1.5 rounded-xl overflow-hidden shadow-2xl cursor-pointer ${img.gridArea}`}
                 >
-                  <div className="w-full h-24 md:h-36 rounded-lg overflow-hidden border border-gold-400/20 relative">
-                    <img src={img.url} alt="Memory" className="w-full h-full object-cover" />
+                  <div className="w-full h-24 md:h-36 rounded-lg overflow-hidden border border-gold-400/20 relative bg-black/40 flex items-center justify-center">
+                    <img src={img.url} alt="Memory" className="w-full h-full object-contain" />
                     <div className="absolute inset-0 bg-radial from-transparent via-transparent to-black/20 pointer-events-none" />
                   </div>
                 </motion.div>
@@ -234,8 +234,8 @@ export default function ThankYou() {
                 transition={{ duration: 0.8, delay: idx * 0.05 }}
                 className="glassmorphism-card p-2 rounded-2xl overflow-hidden shadow-xl cursor-pointer w-full"
               >
-                <div className="w-full h-44 rounded-xl overflow-hidden border border-gold-400/20 relative">
-                  <img src={img.url} alt="Memory" className="w-full h-full object-cover" />
+                <div className="w-full h-44 rounded-xl overflow-hidden border border-gold-400/20 relative bg-black/40 flex items-center justify-center">
+                  <img src={img.url} alt="Memory" className="w-full h-full object-contain" />
                   <div className="absolute inset-0 bg-radial from-transparent via-transparent to-black/25 pointer-events-none" />
                 </div>
               </motion.div>
