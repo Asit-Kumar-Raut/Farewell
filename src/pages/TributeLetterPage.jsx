@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import WaxSealLetter from '../components/WaxSealLetter';
 
 export default function TributeLetterPage({ onComplete }) {
