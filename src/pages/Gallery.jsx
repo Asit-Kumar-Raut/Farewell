@@ -167,9 +167,9 @@ export default function Gallery({ onComplete }) {
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
               className={`relative max-w-full ${
                 activeSlide.aspect === 'portrait' 
-                  ? 'w-[320px] md:w-[380px] h-[450px] md:h-[530px]' 
-                  : 'w-[550px] md:w-[680px] h-[320px] md:h-[420px]'
-              } flex flex-col justify-between`}
+                  ? 'w-[85vw] max-w-[350px] h-[55vh] max-h-[480px]' 
+                  : 'w-[90vw] max-w-[640px] h-[45vh] max-h-[380px]'
+              } flex flex-col`}
             >
               {/* Premium Luxury Frame */}
               <div className="absolute inset-0 bg-[#0d0907] rounded-2xl p-3 shadow-2xl border border-gold-300/30 overflow-hidden group">

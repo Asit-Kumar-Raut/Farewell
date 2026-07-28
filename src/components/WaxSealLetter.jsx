@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-export default function WaxSealLetter() {
+export default function WaxSealLetter({ onLetterClose }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    if (onLetterClose) {
+      onLetterClose();
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center my-8">
@@ -51,7 +58,7 @@ export default function WaxSealLetter() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="absolute inset-0 w-full h-full bg-black/80 backdrop-blur-md"
             />
 
@@ -69,7 +76,7 @@ export default function WaxSealLetter() {
             >
               {/* Close Button */}
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={handleClose}
                 className="absolute top-4 right-4 p-2 text-[#5c4028] hover:text-[#2c1d11] rounded-full hover:bg-black/5 transition-colors cursor-pointer"
               >
                 <X className="w-6 h-6" />

@@ -22,6 +22,29 @@ export default function MemoryTree() {
     { id: 13, name: "Chenmayee Behera", role: "Batch of 2012 - 2017 • Rasanga Prathamika Vidyalaya", wish: "Your guidance was the foundation of our success. Thank you for being the most amazing teacher we could ever ask for!", x: "48%", y: "44%", color: "#fbcfe8" }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.18 // stagger delay between leaves
+      }
+    }
+  };
+
+  const leafVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 12
+      }
+    }
+  };
+
   return (
     <div className="relative w-full max-w-4xl mx-auto h-[600px] bg-black/30 rounded-3xl border border-gold-400/10 p-6 flex flex-col items-center justify-between overflow-hidden shadow-2xl backdrop-blur-sm">
       <div className="text-center z-10">
@@ -85,41 +108,50 @@ export default function MemoryTree() {
       </div>
 
       {/* Interactive Leaves */}
-      <div className="absolute inset-0 w-full h-full">
-        {wishes.map((w) => (
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="absolute inset-0 w-full h-full"
+      >
+        {wishes.map((w, index) => (
           <motion.button
             key={w.id}
+            variants={leafVariants}
             onClick={() => setSelectedWish(w)}
             style={{ left: w.x, top: w.y }}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.8, 1, 0.8],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{
-              duration: Math.random() * 4 + 3,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
             className="absolute p-3 rounded-full cursor-pointer hover:z-30 select-none shadow-[0_0_15px_rgba(251,191,36,0.3)] hover:shadow-[0_0_25px_rgba(251,191,36,0.7)] group"
           >
-            {/* Flapping Leaf Shape */}
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill={w.color}
-              className="transform group-hover:scale-125 transition-transform duration-300 drop-shadow-md"
+            {/* Flapping Leaf Shape with infinite loop */}
+            <motion.div
+              animate={{
+                y: [0, -4, 0],
+                rotate: [0, 4, -4, 0]
+              }}
+              transition={{
+                duration: 3 + (index % 3),
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 0.1 // offset loops slightly
+              }}
             >
-              <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 12 22 12 22C12 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" />
-            </svg>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill={w.color}
+                className="transform group-hover:scale-125 transition-transform duration-300 drop-shadow-md"
+              >
+                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 12 22 12 22C12 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" />
+              </svg>
+            </motion.div>
             <span className="absolute left-1/2 bottom-full transform -translate-x-1/2 mb-1 px-2 py-0.5 bg-black/80 text-[10px] text-gold-200 border border-gold-400/20 rounded font-semibold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-lg">
               {w.name.split(" ")[0]}
             </span>
           </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       {/* Ground Roots / Base details */}
       <div className="w-full h-2 bg-gradient-to-r from-transparent via-gold-400/30 to-transparent mt-auto z-10" />
