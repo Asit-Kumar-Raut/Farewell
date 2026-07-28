@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import GrandOpening from './pages/GrandOpening';
 import TributeLetterPage from './pages/TributeLetterPage';
-import IntroVideo from './pages/IntroVideo';
 import Gallery from './pages/Gallery';
 import ThankYou from './pages/ThankYou';
 import Background from './components/Background';
@@ -11,7 +10,7 @@ import AudioPlayer from './components/AudioPlayer';
 import ParticleTrail from './components/ParticleTrail';
 
 export default function App() {
-  // Navigation phases: 'opening', 'letter', 'video', 'gallery', 'thankyou'
+  // Navigation phases: 'opening', 'letter', 'gallery', 'thankyou'
   const [phase, setPhase] = useState('opening');
   const [isSoundPlaying, setIsSoundPlaying] = useState(false);
 
@@ -22,14 +21,8 @@ export default function App() {
   };
 
   const handleLetterComplete = () => {
-    setPhase('video');
-    // Temporarily stop background music during video phase so video audio can be heard
-    setIsSoundPlaying(false);
-  };
-
-  const handleVideoComplete = () => {
     setPhase('gallery');
-    // Resume atmospheric music for the rest of the journey
+    // Keep background music playing continuously
     setIsSoundPlaying(true);
   };
 
@@ -74,15 +67,7 @@ export default function App() {
           </motion.div>
         )}
 
-        {phase === 'video' && (
-          <motion.div
-            key="video"
-            exit={{ opacity: 0, filter: 'brightness(1.8) blur(8px)' }}
-            transition={{ duration: 1.2 }}
-          >
-            <IntroVideo onComplete={handleVideoComplete} />
-          </motion.div>
-        )}
+
 
         {phase === 'gallery' && (
           <motion.div
