@@ -171,28 +171,5 @@ export default function AudioPlayer({ isPlaying, setIsPlaying }) {
     setIsPlaying(!isPlaying);
   };
 
-  return (
-    <div className="fixed bottom-6 right-6 z-[99] flex items-center justify-center">
-      <button
-        onClick={toggleSound}
-        className="p-4 bg-gold-950/80 hover:bg-gold-900 border border-gold-400/40 rounded-full shadow-lg cursor-pointer hover:shadow-gold-500/30 transition-all duration-300 text-gold-200 hover:text-gold-100 flex items-center justify-center gap-2 group backdrop-blur-md"
-      >
-        {isPlaying ? (
-          <>
-            <Volume2 className="w-5 h-5 animate-pulse" />
-            <span className="max-w-0 overflow-hidden group-hover:max-w-[100px] transition-all duration-500 text-xs font-semibold uppercase tracking-wider whitespace-nowrap">
-              Mute Music
-            </span>
-          </>
-        ) : (
-          <>
-            <VolumeX className="w-5 h-5" />
-            <span className="max-w-0 overflow-hidden group-hover:max-w-[100px] transition-all duration-500 text-xs font-semibold uppercase tracking-wider whitespace-nowrap">
-              Play Music
-            </span>
-          </>
-        )}
-      </button>
-    </div>
-  );
+  return null;
 }

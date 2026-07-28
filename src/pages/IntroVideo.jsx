@@ -31,7 +31,7 @@ export default function IntroVideo({ onComplete }) {
     >
       <video
         ref={videoRef}
-        src="/Video/Free_Farewell_Wishes_for_Teacher_Video_Template__Customizable__-_FlexClip%28720p%29.mp4"
+        src="/Video/intro.mp4"
         className="w-full h-full object-cover pointer-events-none"
         autoPlay
         playsInline
