@@ -78,6 +78,12 @@ export default function GrandOpening({ onComplete, isSoundPlaying, setIsSoundPla
   };
 
   const handleBegin = () => {
+    // Play background MP3 directly in user click event
+    if (window.tributeBgAudio) {
+      window.tributeBgAudio.play().catch((err) => {
+        console.warn("Bg music click play failed:", err);
+      });
+    }
     unlockAudio();
     playBellChime();
     setIsSoundPlaying(true);

@@ -27,7 +27,7 @@ export default function MemoryTree() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.18 // stagger delay between leaves
+        staggerChildren: 0.22 // staggered loading of leaves
       }
     }
   };
@@ -46,19 +46,29 @@ export default function MemoryTree() {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto h-[600px] bg-black/30 rounded-3xl border border-gold-400/10 p-6 flex flex-col items-center justify-between overflow-hidden shadow-2xl backdrop-blur-sm">
-      <div className="text-center z-10">
+    <div className="relative w-full max-w-4xl mx-auto h-[620px] bg-black/35 rounded-3xl border border-gold-400/10 p-6 flex flex-col items-center justify-between overflow-hidden shadow-2xl backdrop-blur-md">
+      <div className="text-center z-10 max-w-2xl px-4">
         <h3 className="font-cinzel text-xl md:text-3xl font-bold text-gold-200 tracking-wider">
           The Tree of Memories
         </h3>
-        <p className="text-xs md:text-sm text-gold-300/60 uppercase tracking-widest mt-1">
-          Click the glowing leaves to reveal student wishes
-        </p>
+        
+        {/* Prominent glowing prompt message as requested */}
+        <motion.p
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2.5, repeat: Infinity }}
+          className="text-xs md:text-sm text-amber-400 font-medium tracking-wide uppercase mt-2 drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]"
+        >
+          ✨ Click on the leaves of the tree to reveal each student's personal message of gratitude to Mam ✨
+        </motion.p>
       </div>
 
-      {/* SVG Tree Structure */}
+      {/* SVG Tree Structure (Grows from ground when scrolled into view) */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none mt-12 select-none">
-        <svg
+        <motion.svg
+          initial={{ scaleY: 0, originY: 1 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
           width="100%"
           height="100%"
           viewBox="0 0 800 600"
@@ -104,7 +114,7 @@ export default function MemoryTree() {
             strokeWidth="8"
             strokeLinecap="round"
           />
-        </svg>
+        </motion.svg>
       </div>
 
       {/* Interactive Leaves */}
@@ -121,7 +131,7 @@ export default function MemoryTree() {
             variants={leafVariants}
             onClick={() => setSelectedWish(w)}
             style={{ left: w.x, top: w.y }}
-            className="absolute p-3 rounded-full cursor-pointer hover:z-30 select-none shadow-[0_0_15px_rgba(251,191,36,0.3)] hover:shadow-[0_0_25px_rgba(251,191,36,0.7)] group"
+            className="absolute p-3 rounded-full cursor-pointer hover:z-30 select-none shadow-[0_0_15px_rgba(251,191,36,0.2)] hover:shadow-[0_0_25px_rgba(251,191,36,0.6)] group"
           >
             {/* Flapping Leaf Shape with infinite loop */}
             <motion.div
@@ -146,7 +156,9 @@ export default function MemoryTree() {
                 <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 12 22 12 22C12 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" />
               </svg>
             </motion.div>
-            <span className="absolute left-1/2 bottom-full transform -translate-x-1/2 mb-1 px-2 py-0.5 bg-black/80 text-[10px] text-gold-200 border border-gold-400/20 rounded font-semibold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-lg">
+            
+            {/* Names are always visible next/above the leaves as requested */}
+            <span className="absolute left-1/2 bottom-full transform -translate-x-1/2 mb-1 px-2 py-0.5 bg-black/90 text-[9px] md:text-[10px] text-gold-300 border border-gold-400/20 rounded font-semibold tracking-wider opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg shadow-black/80">
               {w.name.split(" ")[0]}
             </span>
           </motion.button>
